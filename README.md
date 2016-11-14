@@ -3,7 +3,7 @@
 # Font
 #
 ## Google Font [ubuntu]
-#
+#   
 # Img
 #
 ## player.png : 50px * 50px
