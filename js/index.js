@@ -1,8 +1,6 @@
 //canvas Set
 var canvas = document.getElementById('gameCanvas')
 var context = canvas.getContext('2d')
-alert(document.body.clientHeight);
-
 
 canvas.width = document.body.clientWidth;
 canvas.height = document.body.clientHeight;
@@ -22,6 +20,9 @@ enemy.src= "img/slime.png"
 
 var boss = new Image()
 boss.src = "img/enemy.png"
+
+var heart = new Image()
+heart.src = "img/boss.png"
 //canvas img Set Finish
 
 //canvas object Set
@@ -32,6 +33,9 @@ var bossX = 0;
 var bossY = 0;
 
 var health = 5
+
+var nuclearX = 0;
+var nuclearY = 0;
 
 //canvas object Set Finish
 var shot = new Array()
@@ -57,19 +61,41 @@ var e = 0;
 
 var bossMoving = 25
 
+var bossCount = 1;
+
+var time = 0;
+
 //canvas etc Set Finish
 
 setInterval(init,50)
+
+setinterval(drawTime,1000)
 
 function init(){
        console.log(playerX+"+"+playerY)
        context.clearRect(0,0,canvas.width,canvas.height)
        drawPlayer()
        drawArrow()
-       bossUltimate()
        drawBoss()
+       bossPungta()
+       bossUltimate()
+       heartNum()
 }
 
+function heartNum(){
+    var a = 0;
+    for(var i = 0; i<health; i++){
+        context.drawImage(enemy,a,900)
+        a = a+50;
+    }
+    if(health == 1){
+        alert(time);
+    }
+}
+
+function drawTime(){
+    time++;
+}
 
 
 function bossUltimate(){
@@ -86,13 +112,13 @@ function makeEnemy(){
     
     if(checkXY == 0){
         // x좌표 기반
-        var checkX =Math.floor(Math.random()*200+900)
+        var checkX =Math.floor(Math.random()*100+1800)
         var inputY = Math.floor(Math.random()*window.innerHeight)
         enemyX[checkX] = inputY
         
     }
     else if(checkXY == 1){
-        var checkY = Math.floor(Math.random()*200+500)
+        var checkY = Math.floor(Math.random()*100+900)
         var inputX = Math.floor(Math.random()*window.innerWidth);
         enemyY[checkY] = inputX
     
@@ -155,6 +181,30 @@ function drawBoss(){
     
     bossX = bossX + bossMoving;
     
+}
+
+function bossPungta(){
+    if(nuclearX > playerX){
+        nuclearX = nuclearX - 1;
+    }
+    else if(nuclearX < playerX){
+        nuclearX = nuclearX + 1;
+    }
+    else{
+        nuclearX = nuclearX;
+    }
+    
+    if(nuclearY > playerY){
+        nuclearY = nuclearY - 1;
+    }
+    else if(nuclearY < playerY){
+        nuclearY = nuclearY + 1;
+    }
+    else{
+        nuclearY = nuclearY;
+    }
+    console.log(nuclearX +"+"+ nuclearY)
+    context.drawImage(boss,nuclearX,nuclearY)
 }
 
 window.onkeydown = function(e){
