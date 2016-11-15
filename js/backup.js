@@ -38,7 +38,7 @@ var playerY = canvas.height-50;
 var bossX = 0;
 var bossY = 0;
 
-var bossHealth = 20;
+var bossHealth = 50;
 
 var health = 5
 
@@ -101,7 +101,7 @@ function init(){
             bossUltimate()   
        }
        if(bossHealth < 0){
-           alert("You Win !!");
+           alert("You Win !!")
            window.close()
        }
         
@@ -117,7 +117,6 @@ function heartNum(){
     }
     if(health == 0){
         alert("사망! "+time+"초 생");
-        window.close();
     }
 }
 
